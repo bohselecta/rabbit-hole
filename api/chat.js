@@ -42,7 +42,7 @@ module.exports = async function handler(req, res) {
         'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: 'deepseek-chat',
+        model: 'deepseek-reasoner',
         messages: [
           { role: 'system', content: systemPrompt },
           { role: 'user', content: prompt }
