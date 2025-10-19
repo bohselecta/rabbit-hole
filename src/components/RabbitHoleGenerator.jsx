@@ -751,7 +751,7 @@ DO NOT OUTPUT ANYTHING OTHER THAN VALID JSON. No markdown, no backticks, just pu
                   {/* Animated filaments */}
                   {Array.from({ length: 12 }, (_, i) => {
                     const angle = (i * 30) * (Math.PI / 180);
-                    const radius = 128;
+                    const radius = 100; // Smaller radius to stay within the button area
                     const x = 128 + Math.cos(angle) * radius;
                     const y = 128 + Math.sin(angle) * radius;
                     
@@ -795,7 +795,7 @@ DO NOT OUTPUT ANYTHING OTHER THAN VALID JSON. No markdown, no backticks, just pu
                   <circle
                     cx="128"
                     cy="128"
-                    r="120"
+                    r="100"
                     fill="none"
                     stroke="url(#filamentGradient)"
                     strokeWidth="2"
