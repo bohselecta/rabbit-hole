@@ -612,13 +612,11 @@ DO NOT OUTPUT ANYTHING OTHER THAN VALID JSON. No markdown, no backticks, just pu
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
               {/* Rabbit Logo */}
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center">
-                <img 
-                  src="/rh-logo-graphic-mark.svg" 
-                  alt="Rabbit Hole Logo" 
-                  className="w-7 h-7 text-white"
-                />
-              </div>
+              <img 
+                src="/rh-logo-graphic-mark.svg" 
+                alt="Rabbit Hole Logo" 
+                className="h-12 w-auto"
+              />
               <div>
                 <h1 className="text-2xl md:text-3xl font-bold tracking-wider text-gray-100">
                   RABBIT HOLE
