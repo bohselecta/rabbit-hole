@@ -1,7 +1,7 @@
 // Vercel Serverless Function
 // Place this file at: /api/chat.js
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // Enable CORS
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -77,7 +77,4 @@ export default async function handler(req, res) {
       details: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
-}
-
-// Optional: Add rate limiting
-// You can use libraries like 'express-rate-limit' or implement custom logic
+};
