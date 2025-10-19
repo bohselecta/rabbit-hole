@@ -20,3 +20,38 @@ body {
 #root {
   min-height: 100vh;
 }
+
+/* Loading Animation Keyframes */
+@keyframes fly-to-center {
+  0% {
+    transform: scale(1) translate(0, 0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.5) translate(0, 0);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(0.1) translate(calc(128px - var(--start-x)), calc(128px - var(--start-y)));
+    opacity: 0;
+  }
+}
+
+@keyframes expand-hole {
+  0% {
+    r: 0;
+  }
+  100% {
+    r: 128;
+  }
+}
+
+.animate-fly-to-center {
+  animation-name: fly-to-center;
+  animation-timing-function: ease-in-out;
+}
+
+.animate-expand-hole {
+  animation-name: expand-hole;
+  animation-timing-function: ease-out;
+}

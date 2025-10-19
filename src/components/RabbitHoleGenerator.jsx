@@ -13,6 +13,7 @@ const RabbitHoleGenerator = () => {
   const [viewMode, setViewMode] = useState('tree'); // 'tree' or 'detail'
   const [burrows, setBurrows] = useState([]);
   const [isSearchingBurrows, setIsSearchingBurrows] = useState(false);
+  const [showLoadingAnimation, setShowLoadingAnimation] = useState(false);
   const svgRef = useRef(null);
 
   const starterTopics = [
@@ -124,9 +125,13 @@ DO NOT OUTPUT ANYTHING OTHER THAN VALID JSON. No markdown, no backticks, just pu
   };
 
   const startInvestigation = async (topic) => {
+    setShowLoadingAnimation(true);
     setIsLoading(true);
     setShowStarterIdeas(false);
     setCurrentQuery(topic);
+
+    // Wait for animation to complete (3 seconds)
+    await new Promise(resolve => setTimeout(resolve, 3000));
 
     try {
       const systemPrompt = `You are an enthusiastic investigative research partner helping explore unusual theories and connections. Your role is to:
@@ -171,6 +176,7 @@ DO NOT OUTPUT ANYTHING OTHER THAN VALID JSON. No markdown, no backticks, just pu
       alert("Hmm, something went wrong. Let's try that again!");
     } finally {
       setIsLoading(false);
+      setShowLoadingAnimation(false);
     }
   };
 
@@ -602,6 +608,71 @@ DO NOT OUTPUT ANYTHING OTHER THAN VALID JSON. No markdown, no backticks, just pu
     setShowStarterIdeas(true);
     setBurrows([]);
     setSearchResults({});
+    setShowLoadingAnimation(false);
+  };
+
+  // Loading Animation Component
+  const LoadingAnimation = () => {
+    const gridSize = 6;
+    const cellSize = 40;
+    const centerX = 128; // Half of 256px circle
+    const centerY = 128;
+
+    return (
+      <div className="absolute inset-0 flex items-center justify-center">
+        <svg width="256" height="256" className="overflow-visible">
+          {/* Grid lines */}
+          <defs>
+            <pattern id="grid" width={cellSize} height={cellSize} patternUnits="userSpaceOnUse">
+              <path d={`M ${cellSize} 0 L 0 0 0 ${cellSize}`} fill="none" stroke="black" strokeWidth="1" opacity="0.3"/>
+            </pattern>
+          </defs>
+          <rect width="256" height="256" fill="url(#grid)" className="animate-pulse" />
+          
+          {/* Grid cells flying to center */}
+          {Array.from({ length: gridSize * gridSize }, (_, i) => {
+            const row = Math.floor(i / gridSize);
+            const col = i % gridSize;
+            const startX = col * cellSize + cellSize / 2;
+            const startY = row * cellSize + cellSize / 2;
+            
+            return (
+              <g key={i}>
+                <rect
+                  x={startX - 15}
+                  y={startY - 15}
+                  width="30"
+                  height="30"
+                  fill="black"
+                  className="animate-fly-to-center"
+                  style={{
+                    animationDelay: `${i * 0.05}s`,
+                    animationDuration: '2s',
+                    animationFillMode: 'forwards',
+                    '--start-x': `${startX}px`,
+                    '--start-y': `${startY}px`
+                  }}
+                />
+              </g>
+            );
+          })}
+          
+          {/* Black hole in center */}
+          <circle
+            cx={centerX}
+            cy={centerY}
+            r="0"
+            fill="black"
+            className="animate-expand-hole"
+            style={{
+              animationDelay: '1.5s',
+              animationDuration: '1.5s',
+              animationFillMode: 'forwards'
+            }}
+          />
+        </svg>
+      </div>
+    );
   };
 
   return (
@@ -744,11 +815,16 @@ DO NOT OUTPUT ANYTHING OTHER THAN VALID JSON. No markdown, no backticks, just pu
                 className="relative w-64 h-64 rounded-full border-4 border-cyan-500/40 hover:border-cyan-400/60 transition-all duration-300 flex items-center justify-center group disabled:opacity-50"
               >
                 <div className="absolute inset-4 rounded-full border-2 border-cyan-500/30 group-hover:border-cyan-400/50 transition-all"></div>
-                <div className="text-center z-10">
-                  <div className="text-2xl font-bold tracking-wider text-gray-100 mb-2">ENTER</div>
-                  <div className="text-lg tracking-wide text-cyan-400">THE RABBIT</div>
-                  <div className="text-lg tracking-wide text-cyan-400">HOLE</div>
-                </div>
+                
+                {showLoadingAnimation ? (
+                  <LoadingAnimation />
+                ) : (
+                  <div className="text-center z-10">
+                    <div className="text-2xl font-bold tracking-wider text-gray-100 mb-2">ENTER</div>
+                    <div className="text-lg tracking-wide text-cyan-400">THE RABBIT</div>
+                    <div className="text-lg tracking-wide text-cyan-400">HOLE</div>
+                  </div>
+                )}
               </button>
             </div>
 
