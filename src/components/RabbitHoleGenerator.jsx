@@ -624,6 +624,21 @@ DO NOT OUTPUT ANYTHING OTHER THAN VALID JSON. No markdown, no backticks, just pu
                 <p className="text-cyan-400 text-sm">Investigation Network</p>
               </div>
             </div>
+            
+            {/* Import Button - moved to header */}
+            {!investigationTree && (
+              <label className="bg-slate-900/80 hover:bg-slate-800 border border-cyan-500/30 hover:border-cyan-400/50 rounded-lg px-4 py-2 font-medium flex items-center gap-2 transition-all text-sm cursor-pointer">
+                <Upload className="w-4 h-4" />
+                Import
+                <input
+                  type="file"
+                  accept=".json"
+                  onChange={importInvestigation}
+                  className="hidden"
+                />
+              </label>
+            )}
+            
             {investigationTree && (
               <button className="text-gray-400 hover:text-gray-200">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -675,20 +690,6 @@ DO NOT OUTPUT ANYTHING OTHER THAN VALID JSON. No markdown, no backticks, just pu
             </div>
           )}
 
-          {!investigationTree && (
-            <div className="flex items-center justify-center gap-3 mt-4">
-              <label className="bg-slate-900/80 hover:bg-slate-800 border border-cyan-500/30 hover:border-cyan-400/50 rounded-lg px-4 py-2 font-medium flex items-center gap-2 transition-all text-sm cursor-pointer">
-                <Upload className="w-4 h-4" />
-                Import
-                <input
-                  type="file"
-                  accept=".json"
-                  onChange={importInvestigation}
-                  className="hidden"
-                />
-              </label>
-            </div>
-          )}
         </div>
 
         {/* Share Modal */}
