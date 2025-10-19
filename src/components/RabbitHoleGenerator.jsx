@@ -613,9 +613,11 @@ DO NOT OUTPUT ANYTHING OTHER THAN VALID JSON. No markdown, no backticks, just pu
             <div className="flex items-center gap-3">
               {/* Rabbit Logo */}
               <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center">
-                <svg viewBox="0 0 24 24" className="w-7 h-7 text-white" fill="currentColor">
-                  <path d="M12 2c-1.5 0-2.5 1-2.5 2.5V6c-1.5.5-2.5 2-2.5 3.5 0 .5.1 1 .3 1.5C5.8 11.5 5 12.7 5 14c0 2.2 1.8 4 4 4h6c2.2 0 4-1.8 4-4 0-1.3-.8-2.5-2.3-3-.2-.5-.3-1-.3-1.5 0-1.5-1-3-2.5-3.5V4.5C14 3 13 2 11.5 2h.5zm-2 8c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1zm4 0c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1z"/>
-                </svg>
+                <img 
+                  src="/rh-logo-graphic-mark.svg" 
+                  alt="Rabbit Hole Logo" 
+                  className="w-7 h-7 text-white"
+                />
               </div>
               <div>
                 <h1 className="text-2xl md:text-3xl font-bold tracking-wider text-gray-100">
